@@ -8,47 +8,7 @@ import { RequestStatusArray, RequestStatusEnum } from "@/enum/RequestEnum";
 import { toast } from "react-toastify";
 import { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
-
-interface Request {
-  id: string;
-  memberId: string;
-  childId: string;
-  doctorId: string;
-  status: number;
-  message: string;
-  doctor: {
-    id: string;
-    name: string;
-    email: string;
-  };
-  member: {
-    id: string;
-    name: string;
-    email: string;
-  };
-  child: {
-    id: string;
-    name: string;
-  } | null;
-  isDeleted: boolean;
-  createdAt: string;
-  updatedAt: string;
-}
-
-interface RequestResponse {
-  page?: number;
-  total?: number;
-  totalPages?: number;
-  data?: Request[];
-  message?: string | null;
-  result?: {
-    page: number;
-    total: number;
-    totalPages: number;
-    data: Request[];
-    message: string | null;
-  };
-}
+import { Request, RequestResponse } from "@/types/request";
 
 export default function RequestList({
   page,
@@ -79,10 +39,9 @@ export default function RequestList({
 
       if (response) {
         // Handle different possible response structures
-        const data = response.data || response.result?.data || [];
-        const totalPages =
-          response.totalPages || response.result?.totalPages || 1;
-        const total = response.total || response.result?.total || 0;
+        const data = response.data || response.data || [];
+        const totalPages = response.totalPages || response.totalPages || 1;
+        const total = response.total || response.total || 0;
 
         console.log("Processed data:", { data, totalPages, total });
 
