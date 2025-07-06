@@ -17,16 +17,18 @@ export default function DeleteConfirmModal({
       tabIndex={-1}
       className="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 flex justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full px-4"
     >
-      <div className="relative p-4 w-full max-w-md max-h-full">
-        <div className="relative bg-[#202020] rounded-lg shadow-sm dark:bg-gray-700">
+      <div className="relative w-full max-w-md max-h-full">
+        <div className="relative bg-white rounded-lg shadow-lg border border-gray-200">
+          {/* Close Button */}
           <button
             type="button"
-            className="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+            className="absolute top-3 end-3 text-gray-400 bg-transparent hover:bg-gray-100 hover:text-gray-600 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center transition-colors duration-200"
             data-modal-hide="popup-modal"
             onClick={onClose}
+            aria-label="Close modal"
           >
             <svg
-              className="w-3 h-3"
+              className="w-4 h-4"
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -42,41 +44,56 @@ export default function DeleteConfirmModal({
             </svg>
             <span className="sr-only">Close modal</span>
           </button>
-          <div className="p-4 md:p-5 text-center">
-            <svg
-              className="mx-auto mb-4 text-gray-400 w-10 h-10 sm:w-12 sm:h-12 dark:text-gray-200"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 20 20"
-            >
-              <path
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-              />
-            </svg>
-            <h3 className="mb-5 text-base sm:text-lg font-normal text-gray-500 dark:text-gray-400 px-2">
-              Are you sure you want to delete this flashcard set?
+
+          {/* Modal Content */}
+          <div className="p-6 md:p-8 text-center">
+            {/* Warning Icon */}
+            <div className="mx-auto mb-6 w-16 h-16 md:w-20 md:h-20 bg-red-100 rounded-full flex items-center justify-center">
+              <svg
+                className="text-red-600 w-8 h-8 md:w-10 md:h-10"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                />
+              </svg>
+            </div>
+
+            {/* Title */}
+            <h3 className="mb-2 text-lg md:text-xl font-semibold text-gray-900">
+              Confirm Deletion
             </h3>
-            <div className="flex flex-col sm:flex-row gap-2 sm:gap-0 sm:justify-center">
+
+            {/* Message */}
+            <p className="mb-6 text-sm md:text-base text-gray-600 px-2">
+              Are you sure you want to delete this item? This action cannot be
+              undone.
+            </p>
+
+            {/* Action Buttons */}
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
               <button
                 data-modal-hide="popup-modal"
                 type="button"
-                className="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center justify-center px-5 py-2.5 w-full sm:w-auto"
+                className="text-white bg-red-600 hover:bg-red-700 active:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm md:text-base px-6 py-3 md:py-2.5 inline-flex items-center justify-center transition-all duration-200 shadow-sm hover:shadow-md w-full sm:w-auto"
                 onClick={onDelete}
               >
-                Yes, I&apos;m sure
+                Yes, delete it
               </button>
               <button
                 onClick={onClose}
                 data-modal-hide="popup-modal"
                 type="button"
-                className="py-2.5 px-5 sm:ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 w-full sm:w-auto"
+                className="py-3 md:py-2.5 px-6 text-sm md:text-base font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 hover:text-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-100 transition-all duration-200 shadow-sm hover:shadow-md w-full sm:w-auto"
               >
-                No, cancel
+                Cancel
               </button>
             </div>
           </div>

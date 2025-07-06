@@ -41,21 +41,21 @@ export default function BlogList({
     });
   };
   return (
-    <div className="w-full mx-2 my-5 bg-white rounded-md shadow-md overflow-hidden">
+    <div className="w-full mx-2 my-3 sm:my-5 bg-white rounded-lg shadow-md overflow-hidden">
       <div className="overflow-x-auto">
-        <table className="w-full">
+        <table className="w-full min-w-full">
           <thead className="bg-gray-100 border-b border-gray-200">
             <tr>
-              <th className="text-left p-4 font-semibold text-gray-900">
+              <th className="text-left p-3 sm:p-4 font-semibold text-gray-900 text-xs sm:text-sm">
                 Image
               </th>
-              <th className="text-left p-4 font-semibold text-gray-900">
+              <th className="text-left p-3 sm:p-4 font-semibold text-gray-900 text-xs sm:text-sm">
                 Blog Details
               </th>
-              <th className="text-left p-4 font-semibold text-gray-900">
+              <th className="text-left p-3 sm:p-4 font-semibold text-gray-900 text-xs sm:text-sm">
                 Status
               </th>
-              <th className="text-left p-4 font-semibold text-gray-900">
+              <th className="text-left p-3 sm:p-4 font-semibold text-gray-900 text-xs sm:text-sm">
                 Action
               </th>
             </tr>
@@ -72,7 +72,7 @@ export default function BlogList({
         </table>
       </div>
 
-      <div className="border-t border-gray-200 bg-gray-50 px-4 py-3">
+      <div className="border-t border-gray-200 bg-gray-50 px-3 sm:px-4 py-3">
         <ServerPagination
           currentPage={page}
           totalPages={blogsData.totalPages}

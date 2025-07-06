@@ -41,15 +41,16 @@ export default function ConsultationListItem({
 
   const [isUpdating, setIsUpdating] = useState(false);
   const [status, setStatus] = useState(consultation.status);
+
   return (
-    <tr className="hover:bg-gray-100 transition-colors duration-200">
+    <tr className="hover:bg-gray-50 transition-colors duration-200 border-b border-gray-200">
       {/* Consultation Info */}
-      <td className="px-6 py-4">
+      <td className="px-4 lg:px-6 py-3 lg:py-4">
         <div className="flex flex-col">
           <div className="text-sm font-medium text-gray-900">
             Consultation #{consultation.id.slice(-8)}
           </div>
-          <div className="text-sm text-gray-500 mt-1 max-w-xs truncate">
+          <div className="text-xs lg:text-sm text-gray-500 mt-1 max-w-xs truncate">
             {consultation.request.message}
           </div>
           {consultation.request.child && (
@@ -61,52 +62,52 @@ export default function ConsultationListItem({
       </td>
 
       {/* Member */}
-      <td className="px-6 py-4">
+      <td className="px-4 lg:px-6 py-3 lg:py-4">
         <div className="flex flex-col">
-          <div className="text-sm font-medium text-gray-900">
+          <div className="text-sm font-medium text-gray-900 truncate">
             {consultation.request.member?.name || "N/A"}
           </div>
-          <div className="text-sm text-gray-500">
+          <div className="text-xs lg:text-sm text-gray-500 truncate">
             {consultation.request.member.email}
           </div>
         </div>
       </td>
 
       {/* Doctor */}
-      <td className="px-6 py-4">
+      <td className="px-4 lg:px-6 py-3 lg:py-4">
         <div className="flex flex-col">
-          <div className="text-sm font-medium text-gray-900">
+          <div className="text-sm font-medium text-gray-900 truncate">
             {consultation.request.doctor?.name || "N/A"}
           </div>
-          <div className="text-sm text-gray-500">
+          <div className="text-xs lg:text-sm text-gray-500 truncate">
             {consultation.request.doctor.email}
           </div>
         </div>
       </td>
 
       {/* Child */}
-      <td className="px-6 py-4">
+      <td className="px-4 lg:px-6 py-3 lg:py-4">
         <div className="flex flex-col">
-          <div className="text-sm font-medium text-gray-900">
+          <div className="text-sm font-medium text-gray-900 truncate">
             {consultation.request.child?.name || "-"}
           </div>
         </div>
       </td>
 
       {/* Status */}
-      <td className="px-6 py-4">
+      <td className="px-4 lg:px-6 py-3 lg:py-4">
         {isUpdating ? (
           <select
             value={status}
             onChange={(e) => setStatus(Number(e.target.value))}
-            className="px-3 py-1 text-xs  bg-white-400  text-black rounded  duration-200"
+            className="px-2 lg:px-3 py-1 text-xs bg-gray-100 border border-blue-400 rounded text-gray-900 focus:outline-none focus:ring-1 focus:ring-blue-400 transition-colors duration-200"
           >
             <option value={0}>Ongoing</option>
             <option value={1}>Completed</option>
           </select>
         ) : (
           <span
-            className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(
+            className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full text-white ${getStatusColor(
               consultation.status
             )}`}
           >
@@ -116,18 +117,18 @@ export default function ConsultationListItem({
       </td>
 
       {/* Date */}
-      <td className="px-6 py-4 text-sm text-gray-500">
+      <td className="px-4 lg:px-6 py-3 lg:py-4 text-xs lg:text-sm text-gray-500">
         {formatDate(consultation.createdAt)}
       </td>
 
       {/* Actions */}
-      <td className="px-6 py-4">
+      <td className="px-4 lg:px-6 py-3 lg:py-4">
         <div className="flex flex-col gap-2">
           {/* Update Status Button */}
           {!isUpdating ? (
             <button
               onClick={() => setIsUpdating(true)}
-              className="px-3 py-1 text-xs bg-yellow-400 hover:bg-yellow-500 text-white rounded transition-colors duration-200"
+              className="px-2 lg:px-3 py-1 text-xs bg-yellow-500 hover:bg-yellow-600 active:bg-yellow-700 text-white rounded transition-all duration-200 disabled:opacity-50 shadow-sm hover:shadow-md"
             >
               Update Status
             </button>
@@ -137,7 +138,7 @@ export default function ConsultationListItem({
                 onStatusUpdate(consultation.id, status);
                 setIsUpdating(false);
               }}
-              className="px-3 py-1 text-xs bg-green-400 hover:bg-green-500 text-white rounded transition-colors duration-200"
+              className="px-2 lg:px-3 py-1 text-xs bg-green-600 hover:bg-green-700 active:bg-green-800 text-white rounded transition-all duration-200 disabled:opacity-50 shadow-sm hover:shadow-md"
             >
               Save
             </button>
@@ -146,7 +147,7 @@ export default function ConsultationListItem({
           {/* View Details Button */}
           <button
             onClick={() => onViewDetails(consultation)}
-            className="px-3 py-1 text-xs bg-blue-400 hover:bg-blue-500 text-white rounded transition-colors duration-200"
+            className="px-2 lg:px-3 py-1 text-xs bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white rounded transition-all duration-200 shadow-sm hover:shadow-md"
           >
             View Details
           </button>

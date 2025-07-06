@@ -37,14 +37,14 @@ export default function Page() {
     <div className="w-[100%] p-4">
       <div className="flex justify-between items-center">
         <h1 className="text-2xl font-bold">Blogs</h1>
-        <Link href="/admin/blogs/create">
+        {/* <Link href="/admin/blogs/create">
           <button className="bg-green-500 text-white px-4 py-2 rounded-md">
             Add Blog
           </button>
-        </Link>
+        </Link> */}
       </div>
 
-      <BlogList blogs={blogsData.data} />
+      <BlogList page={page} size={size} />
       <ServerPagination
         currentPage={page}
         totalPages={blogsData.totalPages}

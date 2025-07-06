@@ -38,7 +38,6 @@ interface RequestListItemProps {
 export default function RequestListItem({
   request,
   onStatusUpdate,
-
   onViewDetails,
   getStatusText,
   getStatusColor,
@@ -57,14 +56,14 @@ export default function RequestListItem({
   };
 
   return (
-    <tr className="hover:bg-gray-100 transition-colors duration-200">
+    <tr className="hover:bg-gray-50 transition-colors duration-200 border-b border-gray-200">
       {/* Request Info */}
-      <td className="px-6 py-4">
+      <td className="px-4 lg:px-6 py-3 lg:py-4">
         <div className="flex flex-col">
           <div className="text-sm font-medium text-gray-900">
             Request #{request.id.slice(-8)}
           </div>
-          <div className="text-sm text-gray-500 mt-1 max-w-xs truncate">
+          <div className="text-xs lg:text-sm text-gray-500 mt-1 max-w-xs truncate">
             {request.message}
           </div>
           {request.child && (
@@ -76,27 +75,31 @@ export default function RequestListItem({
       </td>
 
       {/* Member */}
-      <td className="px-6 py-4">
+      <td className="px-4 lg:px-6 py-3 lg:py-4">
         <div className="flex flex-col">
-          <div className="text-sm font-medium text-gray-900">
+          <div className="text-sm font-medium text-gray-900 truncate">
             {request.member?.name || "N/A"}
           </div>
-          <div className="text-sm text-gray-500">{request.member.email}</div>
+          <div className="text-xs lg:text-sm text-gray-500 truncate">
+            {request.member.email}
+          </div>
         </div>
       </td>
 
       {/* Doctor */}
-      <td className="px-6 py-4">
+      <td className="px-4 lg:px-6 py-3 lg:py-4">
         <div className="flex flex-col">
-          <div className="text-sm font-medium text-gray-900">
+          <div className="text-sm font-medium text-gray-900 truncate">
             {request.doctor?.name || "N/A"}
           </div>
-          <div className="text-sm text-gray-500">{request.doctor.email}</div>
+          <div className="text-xs lg:text-sm text-gray-500 truncate">
+            {request.doctor.email}
+          </div>
         </div>
       </td>
 
       {/* Status */}
-      <td className="px-6 py-4">
+      <td className="px-4 lg:px-6 py-3 lg:py-4">
         {!isUpdating ? (
           <span
             className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(
@@ -112,7 +115,7 @@ export default function RequestListItem({
             }}
             disabled={!isUpdating}
             value={status}
-            className="px-3 py-1 text-xs bg-gray-100 border border-blue-400 rounded text-gray-900 focus:outline-none focus:ring-1 focus:ring-blue-400 disabled:opacity-50"
+            className="px-2 lg:px-3 py-1 text-xs bg-gray-100 border border-blue-400 rounded text-gray-900 focus:outline-none focus:ring-1 focus:ring-blue-400 disabled:opacity-50 transition-colors duration-200"
           >
             <option value={0}>Pending</option>
             <option value={1}>Admin Rejected</option>
@@ -124,19 +127,18 @@ export default function RequestListItem({
       </td>
 
       {/* Date */}
-      <td className="px-6 py-4 text-sm text-gray-500">
+      <td className="px-4 lg:px-6 py-3 lg:py-4 text-xs lg:text-sm text-gray-500">
         {formatDate(request.createdAt)}
       </td>
 
       {/* Actions */}
-      <td className="px-6 py-4">
+      <td className="px-4 lg:px-6 py-3 lg:py-4">
         <div className="flex flex-col gap-2">
           {/* Status Update Dropdown */}
-
           {!isUpdating ? (
             <button
               onClick={() => setIsUpdating(!isUpdating)}
-              className="px-3 py-1 text-xs bg-yellow-500 hover:bg-yellow-700 text-white rounded transition-colors duration-200 disabled:opacity-50"
+              className="px-2 lg:px-3 py-1 text-xs bg-yellow-500 hover:bg-yellow-600 active:bg-yellow-700 text-white rounded transition-all duration-200 disabled:opacity-50 shadow-sm hover:shadow-md"
             >
               Update Status
             </button>
@@ -146,7 +148,7 @@ export default function RequestListItem({
                 onStatusUpdate(request.id, status);
                 setIsUpdating(false);
               }}
-              className="px-3 py-1 text-xs bg-green-600 hover:bg-green-700 text-white rounded transition-colors duration-200 disabled:opacity-50"
+              className="px-2 lg:px-3 py-1 text-xs bg-green-600 hover:bg-green-700 active:bg-green-800 text-white rounded transition-all duration-200 disabled:opacity-50 shadow-sm hover:shadow-md"
             >
               Save
             </button>
@@ -155,7 +157,7 @@ export default function RequestListItem({
           {/* View Details Button */}
           <button
             onClick={() => onViewDetails(request)}
-            className="px-3 py-1 text-xs bg-blue-400 hover:bg-blue-500 text-white rounded transition-colors duration-200"
+            className="px-2 lg:px-3 py-1 text-xs bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white rounded transition-all duration-200 shadow-sm hover:shadow-md"
           >
             View Details
           </button>
