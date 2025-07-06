@@ -2,11 +2,10 @@
 
 import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
-import BlogList from "@/components/admin/blogs/BlogList";
+import BlogList from "@/components/blogs/BlogList";
 import ServerPagination from "@/components/common/ServerPagination";
 import BlogService from "@/services/blogService";
 import { Blog } from "@/types/blog";
-import Link from "next/link";
 
 export default function Page() {
   const searchParams = useSearchParams();
@@ -44,7 +43,7 @@ export default function Page() {
         </Link> */}
       </div>
 
-      <BlogList page={page} size={size} />
+      <BlogList blogs={blogsData.data} />
       <ServerPagination
         currentPage={page}
         totalPages={blogsData.totalPages}

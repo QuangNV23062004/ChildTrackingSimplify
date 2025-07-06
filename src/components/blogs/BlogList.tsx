@@ -1,6 +1,7 @@
 import React from "react";
 import BlogCard from "./BlogCard";
 import { Blog } from "@/types/blog";
+import Link from "next/link";
 
 export default function BlogList({ blogs }: { blogs: Blog[] }) {
   return (
@@ -8,9 +9,9 @@ export default function BlogList({ blogs }: { blogs: Blog[] }) {
       <div className="flex justify-between items-center">
         {blogs && blogs.length > 0 ? (
           blogs.map((blog) => (
-            <div key={blog.id}>
+            <Link key={blog.id} href={`/blogs/${blog.id}`}>
               <BlogCard blog={blog} />
-            </div>
+            </Link>
           ))
         ) : (
           <div>No blogs found</div>
