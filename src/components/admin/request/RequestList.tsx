@@ -139,23 +139,32 @@ export default function RequestList({
     }
   };
 
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    });
+  };
+
   if (loading) {
     return (
       <div className="flex justify-center items-center h-64">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-400"></div>
+        <div className="animate-spin rounded-full h-8 w-8 sm:h-12 sm:w-12 border-b-2 border-blue-400"></div>
       </div>
     );
   }
 
   return (
-    <div className="p-6 bg-white min-h-screen">
+    <div className="p-4 sm:p-6 bg-white min-h-screen">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-6">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
             Request Management
           </h1>
-          <p className="text-gray-500">
+          <p className="text-sm sm:text-base text-gray-500">
             Manage consultation requests from members
           </p>
         </div>
@@ -168,7 +177,7 @@ export default function RequestList({
               onChange={(e) =>
                 router.push(`/admin/requests?size=${e.target.value}`)
               }
-              className="px-4 py-2 bg-gray-100 border border-gray-300 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="px-3 sm:px-4 py-2 bg-gray-100 border border-gray-300 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-400 text-sm sm:text-base"
             >
               <option value={5}>5 per page</option>
               <option value={10}>10 per page</option>
@@ -179,35 +188,39 @@ export default function RequestList({
         </div>
 
         {/* Stats */}
-        <div className="mb-6 grid grid-cols-1 md:grid-cols-4 gap-4">
-          <div className="bg-gray-100 p-4 rounded-lg border border-gray-200">
-            <div className="text-2xl font-bold text-gray-900">{total}</div>
-            <div className="text-gray-500">Total Requests</div>
+        <div className="mb-6 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+          <div className="bg-gray-100 p-3 sm:p-4 rounded-lg border border-gray-200">
+            <div className="text-xl sm:text-2xl font-bold text-gray-900">
+              {total}
+            </div>
+            <div className="text-xs sm:text-sm text-gray-500">
+              Total Requests
+            </div>
           </div>
-          <div className="bg-gray-100 p-4 rounded-lg border border-gray-200">
-            <div className="text-2xl font-bold text-yellow-500">
+          <div className="bg-gray-100 p-3 sm:p-4 rounded-lg border border-gray-200">
+            <div className="text-xl sm:text-2xl font-bold text-yellow-500">
               {requests?.filter((r) => r.status === 0).length || 0}
             </div>
-            <div className="text-gray-500">Pending</div>
+            <div className="text-xs sm:text-sm text-gray-500">Pending</div>
           </div>
-          <div className="bg-gray-100 p-4 rounded-lg border border-gray-200">
-            <div className="text-2xl font-bold text-green-500">
+          <div className="bg-gray-100 p-3 sm:p-4 rounded-lg border border-gray-200">
+            <div className="text-xl sm:text-2xl font-bold text-green-500">
               {requests?.filter((r) => r.status === 2 || r.status === 3)
                 .length || 0}
             </div>
-            <div className="text-gray-500">Accepted</div>
+            <div className="text-xs sm:text-sm text-gray-500">Accepted</div>
           </div>
-          <div className="bg-gray-100 p-4 rounded-lg border border-gray-200">
-            <div className="text-2xl font-bold text-red-500">
+          <div className="bg-gray-100 p-3 sm:p-4 rounded-lg border border-gray-200">
+            <div className="text-xl sm:text-2xl font-bold text-red-500">
               {requests?.filter((r) => r.status === 1 || r.status === 4)
                 .length || 0}
             </div>
-            <div className="text-gray-500">Rejected</div>
+            <div className="text-xs sm:text-sm text-gray-500">Rejected</div>
           </div>
         </div>
 
-        {/* Table */}
-        <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+        {/* Desktop Table View */}
+        <div className="hidden lg:block bg-white rounded-lg border border-gray-200 overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead className="bg-gray-200">
@@ -257,6 +270,91 @@ export default function RequestList({
               </tbody>
             </table>
           </div>
+        </div>
+
+        {/* Mobile Card View */}
+        <div className="lg:hidden space-y-4">
+          {!requests || requests.length === 0 ? (
+            <div className="text-center py-8">
+              <div className="text-gray-400 text-lg mb-2">
+                No requests found
+              </div>
+              <p className="text-gray-500 text-sm">
+                There are no consultation requests at the moment
+              </p>
+            </div>
+          ) : (
+            requests.map((request) => (
+              <div
+                key={request.id}
+                className="bg-white rounded-lg border border-gray-200 p-4 shadow-sm"
+              >
+                <div className="flex flex-col space-y-3">
+                  {/* Header with Status */}
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center space-x-3">
+                      <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-white font-semibold text-sm">
+                        {request.member?.name?.charAt(0).toUpperCase() || "M"}
+                      </div>
+                      <div>
+                        <h3 className="font-semibold text-gray-900 text-sm">
+                          {request.member?.name || "Unknown Member"}
+                        </h3>
+                        <p className="text-gray-500 text-xs">
+                          {request.doctor?.name || "No Doctor Assigned"}
+                        </p>
+                      </div>
+                    </div>
+                    <span
+                      className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(
+                        request.status
+                      )}`}
+                    >
+                      {getStatusText(request.status)}
+                    </span>
+                  </div>
+
+                  {/* Request Details */}
+                  <div className="space-y-2">
+                    <div className="text-sm text-gray-600">
+                      <span className="font-medium">Message:</span>{" "}
+                      {request.message || "No message"}
+                    </div>
+                    <div className="text-sm text-gray-600">
+                      <span className="font-medium">Date:</span>{" "}
+                      {formatDate(request.createdAt)}
+                    </div>
+                  </div>
+
+                  {/* Actions */}
+                  <div className="flex gap-2 pt-2 border-t border-gray-100">
+                    <button
+                      onClick={() => handleViewDetails(request)}
+                      className="flex-1 px-3 py-2 bg-blue-600 text-white text-sm rounded-md hover:bg-blue-700 transition-colors duration-200"
+                    >
+                      View Details
+                    </button>
+                    {request.status === 0 && (
+                      <button
+                        onClick={() => handleStatusUpdate(request.id, 2)}
+                        className="flex-1 px-3 py-2 bg-green-600 text-white text-sm rounded-md hover:bg-green-700 transition-colors duration-200"
+                      >
+                        Accept
+                      </button>
+                    )}
+                    {request.status === 0 && (
+                      <button
+                        onClick={() => handleStatusUpdate(request.id, 1)}
+                        className="flex-1 px-3 py-2 bg-red-600 text-white text-sm rounded-md hover:bg-red-700 transition-colors duration-200"
+                      >
+                        Reject
+                      </button>
+                    )}
+                  </div>
+                </div>
+              </div>
+            ))
+          )}
         </div>
 
         {/* Pagination */}

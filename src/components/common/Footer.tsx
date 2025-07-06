@@ -42,87 +42,129 @@ const socialLinks = [
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-50 border-t border-gray-200 text-gray-700 ">
-      <div className="max-w-7xl mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
-          <div>
-            <h4 className="font-semibold text-lg mb-2">Company</h4>
-            <ul className="space-y-1">
+    <footer className="bg-gray-50 border-t border-gray-200 text-gray-700">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-12">
+          {/* Company Section */}
+          <div className="text-center sm:text-left">
+            <h4 className="font-semibold text-lg mb-3 sm:mb-4">Company</h4>
+            <ul className="space-y-2 sm:space-y-3">
               <li>
-                <Link href="/about" className="hover:underline">
+                <Link
+                  href="/about"
+                  className="hover:text-blue-600 transition-colors duration-200 text-sm sm:text-base"
+                >
                   About Us
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="hover:underline">
+                <Link
+                  href="/contact"
+                  className="hover:text-blue-600 transition-colors duration-200 text-sm sm:text-base"
+                >
                   Contact
                 </Link>
               </li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="font-semibold text-lg mb-2">Resources</h4>
-            <ul className="space-y-1">
               <li>
-                <Link href="/blog" className="hover:underline">
-                  Blog
-                </Link>
-              </li>
-              <li>
-                <Link href="/faqs" className="hover:underline">
-                  FAQs
+                <Link
+                  href="/privacy"
+                  className="hover:text-blue-600 transition-colors duration-200 text-sm sm:text-base"
+                >
+                  Privacy Policy
                 </Link>
               </li>
             </ul>
           </div>
 
-          <div>
-            <h4 className="font-semibold text-lg mb-2">Stay Connected</h4>
-            <p className="text-sm mb-2">
+          {/* Resources Section */}
+          <div className="text-center sm:text-left">
+            <h4 className="font-semibold text-lg mb-3 sm:mb-4">Resources</h4>
+            <ul className="space-y-2 sm:space-y-3">
+              <li>
+                <Link
+                  href="/blog"
+                  className="hover:text-blue-600 transition-colors duration-200 text-sm sm:text-base"
+                >
+                  Blog
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/faqs"
+                  className="hover:text-blue-600 transition-colors duration-200 text-sm sm:text-base"
+                >
+                  FAQs
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/support"
+                  className="hover:text-blue-600 transition-colors duration-200 text-sm sm:text-base"
+                >
+                  Support
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Newsletter Section */}
+          <div className="text-center sm:text-left">
+            <h4 className="font-semibold text-lg mb-3 sm:mb-4">
+              Stay Connected
+            </h4>
+            <p className="text-sm mb-4 text-gray-600">
               Subscribe to our newsletter for updates, tips, and resources.
             </p>
-            <form className="flex items-center gap-2 mt-2">
+            <form className="flex flex-col sm:flex-row items-center gap-3 mt-4">
               <input
                 type="email"
                 placeholder="Enter your email"
-                className="flex-1 px-3 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-200 bg-white text-sm"
+                className="flex-1 w-full px-3 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white text-sm transition-colors duration-200"
               />
               <button
                 type="submit"
-                className="px-4 py-2 rounded bg-blue-500 text-white font-medium hover:bg-blue-600 text-sm"
+                className="w-full sm:w-auto px-6 py-2 rounded-lg bg-blue-600 text-white font-medium hover:bg-blue-700 text-sm transition-colors duration-200 shadow-sm hover:shadow-md"
               >
-                Join
+                Subscribe
               </button>
             </form>
           </div>
         </div>
       </div>
+
+      {/* Bottom Section */}
       <div className="border-t border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2">
-            <Image
-              src="/next.svg"
-              alt="GrowthGuardian Logo"
-              width={30}
-              height={30}
-            />
-            <span className="text-sm">
-              © {new Date().getFullYear()} GrowthGuardian. All rights reserved
-            </span>
-          </div>
-          <div className="flex gap-4">
-            {socialLinks.map((s) => (
-              <a
-                key={s.label}
-                href={s.href}
-                aria-label={s.label}
-                className="text-gray-400 hover:text-blue-500 transition"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {s.icon}
-              </a>
-            ))}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+            {/* Logo and Copyright */}
+            <div className="flex items-center gap-3">
+              <Image
+                src="/next.svg"
+                alt="GrowthGuardian Logo"
+                width={28}
+                height={28}
+                className="w-7 h-7 sm:w-8 sm:h-8"
+              />
+              <span className="text-sm sm:text-base text-gray-600">
+                © {new Date().getFullYear()} GrowthGuardian. All rights reserved
+              </span>
+            </div>
+
+            {/* Social Links */}
+            <div className="flex gap-4 sm:gap-6">
+              {socialLinks.map((social) => (
+                <a
+                  key={social.label}
+                  href={social.href}
+                  aria-label={social.label}
+                  className="text-gray-400 hover:text-blue-600 transition-colors duration-200 p-1 rounded-full hover:bg-gray-100"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {social.icon}
+                </a>
+              ))}
+            </div>
           </div>
         </div>
       </div>
