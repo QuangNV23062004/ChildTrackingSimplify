@@ -16,7 +16,7 @@ class BlogService {
     try {
       const url = `/Blog/${id}`;
       const response = await api.get(url);
-      return response.data;
+      return response;
     } catch (error) {
       throw error;
     }
