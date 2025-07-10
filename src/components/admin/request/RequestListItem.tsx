@@ -138,7 +138,7 @@ export default function RequestListItem({
           {!isUpdating ? (
             <button
               onClick={() => setIsUpdating(!isUpdating)}
-              className="px-2 lg:px-3 py-1 text-xs bg-yellow-500 hover:bg-yellow-600 active:bg-yellow-700 text-white rounded transition-all duration-200 disabled:opacity-50 shadow-sm hover:shadow-md"
+              className="px-2 lg:px-3 py-1 text-xs bg-yellow-500 hover:bg-yellow-600 active:bg-yellow-700 text-black rounded transition-all duration-200 disabled:opacity-50 shadow-sm hover:shadow-md"
             >
               Update Status
             </button>
@@ -148,7 +148,7 @@ export default function RequestListItem({
                 onStatusUpdate(request.id, status);
                 setIsUpdating(false);
               }}
-              className="px-2 lg:px-3 py-1 text-xs bg-green-600 hover:bg-green-700 active:bg-green-800 text-white rounded transition-all duration-200 disabled:opacity-50 shadow-sm hover:shadow-md"
+              className="px-2 lg:px-3 py-1 text-xs bg-green-600 hover:bg-green-700 active:bg-green-800 text-black rounded transition-all duration-200 disabled:opacity-50 shadow-sm hover:shadow-md"
             >
               Save
             </button>
@@ -157,7 +157,7 @@ export default function RequestListItem({
           {/* View Details Button */}
           <button
             onClick={() => onViewDetails(request)}
-            className="px-2 lg:px-3 py-1 text-xs bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white rounded transition-all duration-200 shadow-sm hover:shadow-md"
+            className="px-2 lg:px-3 py-1 text-xs bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-black rounded transition-all duration-200 shadow-sm hover:shadow-md"
           >
             View Details
           </button>

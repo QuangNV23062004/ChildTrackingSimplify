@@ -6,6 +6,7 @@ import BlogListItem from "./BlogListItem";
 import ServerPagination from "@/components/common/ServerPagination";
 import blogService from "@/services/blogService";
 import { toast } from "react-toastify";
+import Loading from "../../common/Loading";
 
 export default function BlogList({
   page,
@@ -28,7 +29,7 @@ export default function BlogList({
     fetchBlogs();
   }, [page, size]);
 
-  if (!blogsData) return <div>Loading...</div>;
+  if (!blogsData) return <Loading message="Loading blogs..." />;
 
   const handleStatusChange = async (blogId: string, status: BlogStatus) => {
     await blogService.updateBlogStatus(blogId, status);

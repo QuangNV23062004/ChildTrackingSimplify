@@ -82,7 +82,7 @@ export default function DeleteConfirmModal({
               <button
                 data-modal-hide="popup-modal"
                 type="button"
-                className="text-white bg-red-600 hover:bg-red-700 active:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm md:text-base px-6 py-3 md:py-2.5 inline-flex items-center justify-center transition-all duration-200 shadow-sm hover:shadow-md w-full sm:w-auto"
+                className="text-black bg-red-600 hover:bg-red-700 active:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm md:text-base px-6 py-3 md:py-2.5 inline-flex items-center justify-center transition-all duration-200 shadow-sm hover:shadow-md w-full sm:w-auto"
                 onClick={onDelete}
               >
                 Yes, delete it

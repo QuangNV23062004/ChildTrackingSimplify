@@ -123,7 +123,7 @@ export default function Footer() {
               />
               <button
                 type="submit"
-                className="w-full sm:w-auto px-6 py-2 rounded-lg bg-blue-600 text-white font-medium hover:bg-blue-700 text-sm transition-colors duration-200 shadow-sm hover:shadow-md"
+                className="w-full sm:w-auto px-6 py-2 rounded-lg bg-blue-600 text-black font-medium hover:bg-blue-700 text-sm transition-colors duration-200 shadow-sm hover:shadow-md"
               >
                 Subscribe
               </button>
@@ -138,13 +138,6 @@ export default function Footer() {
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             {/* Logo and Copyright */}
             <div className="flex items-center gap-3">
-              <Image
-                src="/next.svg"
-                alt="GrowthGuardian Logo"
-                width={28}
-                height={28}
-                className="w-7 h-7 sm:w-8 sm:h-8"
-              />
               <span className="text-sm sm:text-base text-gray-600">
                 © {new Date().getFullYear()} GrowthGuardian. All rights reserved
               </span>

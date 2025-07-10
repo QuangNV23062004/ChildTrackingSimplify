@@ -107,7 +107,7 @@ export default function ConsultationListItem({
           </select>
         ) : (
           <span
-            className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full text-white ${getStatusColor(
+            className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full text-black ${getStatusColor(
               consultation.status
             )}`}
           >
@@ -128,7 +128,7 @@ export default function ConsultationListItem({
           {!isUpdating ? (
             <button
               onClick={() => setIsUpdating(true)}
-              className="px-2 lg:px-3 py-1 text-xs bg-yellow-500 hover:bg-yellow-600 active:bg-yellow-700 text-white rounded transition-all duration-200 disabled:opacity-50 shadow-sm hover:shadow-md"
+              className="px-2 lg:px-3 py-1 text-xs bg-yellow-500 hover:bg-yellow-600 active:bg-yellow-700 text-black rounded transition-all duration-200 disabled:opacity-50 shadow-sm hover:shadow-md"
             >
               Update Status
             </button>
@@ -138,7 +138,7 @@ export default function ConsultationListItem({
                 onStatusUpdate(consultation.id, status);
                 setIsUpdating(false);
               }}
-              className="px-2 lg:px-3 py-1 text-xs bg-green-600 hover:bg-green-700 active:bg-green-800 text-white rounded transition-all duration-200 disabled:opacity-50 shadow-sm hover:shadow-md"
+              className="px-2 lg:px-3 py-1 text-xs bg-green-600 hover:bg-green-700 active:bg-green-800 text-black rounded transition-all duration-200 disabled:opacity-50 shadow-sm hover:shadow-md"
             >
               Save
             </button>
@@ -147,7 +147,7 @@ export default function ConsultationListItem({
           {/* View Details Button */}
           <button
             onClick={() => onViewDetails(consultation)}
-            className="px-2 lg:px-3 py-1 text-xs bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white rounded transition-all duration-200 shadow-sm hover:shadow-md"
+            className="px-2 lg:px-3 py-1 text-xs bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-black rounded transition-all duration-200 shadow-sm hover:shadow-md"
           >
             View Details
           </button>

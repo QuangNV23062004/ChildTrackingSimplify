@@ -2,7 +2,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { AxiosError } from "axios";
-import { toast } from "react-toastify";
+import { useToast } from "../common/ToastContext";
 import authService from "@/services/authService";
 
 export default function RegisterForm() {
@@ -14,6 +14,8 @@ export default function RegisterForm() {
   });
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [submitting, setSubmitting] = useState(false);
+
+  const toast = useToast();
 
   const validate = () => {
     const errs: { [key: string]: string } = {};
@@ -53,13 +55,13 @@ export default function RegisterForm() {
       try {
         await authService.signup(form.name, form.email, form.password);
         setSubmitting(false);
-        toast.success("Registration successful!");
+        toast.showToast("Registration successful!", "success");
       } catch (error) {
         setSubmitting(false);
         if (error instanceof AxiosError) {
-          toast.error(error.response?.data);
+          toast.showToast(error.response?.data, "error");
         } else {
-          toast.error("An error occurred");
+          toast.showToast("An error occurred", "error");
           setTimeout(() => {}, 5000);
         }
       }
@@ -67,7 +69,7 @@ export default function RegisterForm() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-[60vh] py-8 text-white w-full ">
+    <div className="flex flex-col items-center justify-center min-h-[60vh] py-8 text-black w-full ">
       <div className="w-full max-w-sm bg-black/50 rounded-lg shadow p-6 flex flex-col gap-4">
         <h2 className="text-2xl font-bold text-center mb-2">Register</h2>
         <div>
@@ -151,14 +153,14 @@ export default function RegisterForm() {
           </div>
           <button
             onClick={handleSubmit}
-            className="w-full py-2 mt-2 bg-blue-500 text-white font-semibold rounded hover:bg-blue-600 transition"
+            className="w-full py-2 mt-2 bg-blue-500 text-black font-semibold rounded hover:bg-blue-600 transition"
             disabled={submitting}
           >
             {submitting ? "Registering..." : "Register"}
           </button>
         </div>
       </div>
-      <div className="mt-4 text-center text-sm text-white-600">
+      <div className="mt-4 text-center text-sm text-black-600">
         Already have an account?{" "}
         <Link
           href="/login"

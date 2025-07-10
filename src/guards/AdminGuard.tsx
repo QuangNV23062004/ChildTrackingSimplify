@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { notFound, useRouter } from "next/navigation";
 import { RoleEnum } from "@/enum/RoleEnum";
+import Loading from "../components/common/Loading";
 
 export default function AdminGuard({
   children,
@@ -41,11 +42,7 @@ export default function AdminGuard({
   }, [router]);
 
   if (loading) {
-    return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-500"></div>
-      </div>
-    );
+    return <Loading message="Checking admin..." />;
   }
 
   if (!allowed) {

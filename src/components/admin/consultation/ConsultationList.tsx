@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import ServerPagination from "@/components/common/ServerPagination";
 import ConsultationDetailModal from "./ConsultationDetailModal";
 import ConsultationListItem from "./ConsultationListItem";
+import Loading from "../../common/Loading";
 
 export default function ConsultationList({
   page,
@@ -72,11 +73,7 @@ export default function ConsultationList({
   }, [page, size]);
 
   if (loading) {
-    return (
-      <div className="flex justify-center items-center h-64">
-        <div className="animate-spin rounded-full h-8 w-8 sm:h-12 sm:w-12 border-b-2 border-blue-400"></div>
-      </div>
-    );
+    return <Loading message="Loading consultations..." />;
   }
 
   const handleUpdateConsultationStatus = async (id: string, status: number) => {
@@ -246,7 +243,7 @@ export default function ConsultationList({
                   {/* Header with Status */}
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-3">
-                      <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-white font-semibold text-sm">
+                      <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-black font-semibold text-sm">
                         {consultation.request.member?.name
                           ?.charAt(0)
                           .toUpperCase() || "M"}
@@ -263,7 +260,7 @@ export default function ConsultationList({
                       </div>
                     </div>
                     <span
-                      className={`px-2 py-1 rounded-full text-xs font-medium text-white ${getStatusColor(
+                      className={`px-2 py-1 rounded-full text-xs font-medium text-black ${getStatusColor(
                         consultation.status
                       )}`}
                     >
@@ -296,7 +293,7 @@ export default function ConsultationList({
                         setSelectedConsultation(consultation);
                         setIsModalOpen(true);
                       }}
-                      className="flex-1 px-3 py-2 bg-blue-600 text-white text-sm rounded-md hover:bg-blue-700 transition-colors duration-200"
+                      className="flex-1 px-3 py-2 bg-blue-600 text-black text-sm rounded-md hover:bg-blue-700 transition-colors duration-200"
                     >
                       View Details
                     </button>
@@ -305,7 +302,7 @@ export default function ConsultationList({
                         onClick={() =>
                           handleUpdateConsultationStatus(consultation.id, 1)
                         }
-                        className="flex-1 px-3 py-2 bg-green-600 text-white text-sm rounded-md hover:bg-green-700 transition-colors duration-200"
+                        className="flex-1 px-3 py-2 bg-green-600 text-black text-sm rounded-md hover:bg-green-700 transition-colors duration-200"
                       >
                         Mark Complete
                       </button>

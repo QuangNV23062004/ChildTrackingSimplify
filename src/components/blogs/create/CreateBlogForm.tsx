@@ -111,7 +111,7 @@ export default function CreateBlogForm() {
     <button
       type="button"
       className={`px-2 py-1 rounded mx-1 ${
-        active ? "bg-blue-500 text-white" : "bg-gray-100 text-black"
+        active ? "bg-blue-500 text-black" : "bg-gray-100 text-black"
       } hover:bg-blue-100`}
       onClick={onClick}
       title={title}
@@ -268,7 +268,7 @@ export default function CreateBlogForm() {
 
       <button
         type="submit"
-        className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-lg shadow transition"
+        className="w-full bg-green-600 hover:bg-green-700 text-black font-semibold py-3 rounded-lg shadow transition"
       >
         Save
       </button>

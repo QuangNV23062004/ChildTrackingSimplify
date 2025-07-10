@@ -63,7 +63,7 @@ export default function SideBar() {
       <div className="lg:hidden fixed top-4 left-4 z-50">
         <button
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className="p-2 bg-blue-500 text-white rounded-md shadow-lg"
+          className="p-2 bg-blue-500 text-black rounded-md shadow-lg"
         >
           {isMobileMenuOpen ? (
             <XMarkIcon className="w-6 h-6" />
@@ -76,7 +76,7 @@ export default function SideBar() {
       {/* Mobile overlay */}
       {isMobileMenuOpen && (
         <div
-          className="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-40"
+          className="lg:hidden fixed inset-0 bg-black/50 z-40"
           onClick={closeMobileMenu}
         />
       )}
@@ -96,7 +96,7 @@ export default function SideBar() {
           {/* User section */}
           {user && (
             <div className="flex flex-col items-center mt-6 mb-2 w-full px-4">
-              <div className="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold text-xl mb-1 shadow-lg">
+              <div className="w-12 h-12 rounded-full bg-blue-500 flex items-center justify-center text-black font-bold text-xl mb-1 shadow-lg">
                 {user.name.charAt(0).toUpperCase()}
               </div>
               <div className="text-base font-semibold text-gray-800 text-center">
@@ -119,7 +119,7 @@ export default function SideBar() {
                   className={`flex items-center gap-3 text-sm font-medium px-3 py-3 w-full rounded-md transition-colors duration-200 border border-gray-200 mb-1
                     ${
                       isActive
-                        ? "bg-blue-500 text-white border-blue-500"
+                        ? "bg-blue-500 text-black border-blue-500"
                         : "bg-white text-gray-700 hover:bg-blue-50 hover:text-blue-600"
                     }
                   `}

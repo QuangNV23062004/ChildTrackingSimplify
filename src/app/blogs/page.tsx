@@ -6,6 +6,7 @@ import BlogList from "@/components/blogs/BlogList";
 import ServerPagination from "@/components/common/ServerPagination";
 import BlogService from "@/services/blogService";
 import { Blog } from "@/types/blog";
+import Loading from "@/components/common/Loading";
 
 export default function Page() {
   const searchParams = useSearchParams();
@@ -29,7 +30,11 @@ export default function Page() {
   }, [page, size]);
 
   if (!blogsData) {
-    return <div className="w-[100%] p-4">Loading blogs...</div>;
+    return (
+      <div className="flex-1 flex flex-col justify-center items-center min-h-[60vh]">
+        <Loading message="Loading blogs..." />
+      </div>
+    );
   }
 
   return (
@@ -37,7 +42,7 @@ export default function Page() {
       <div className="flex justify-between items-center">
         <h1 className="text-2xl font-bold">Blogs</h1>
         {/* <Link href="/admin/blogs/create">
-          <button className="bg-green-500 text-white px-4 py-2 rounded-md">
+          <button className="bg-green-500 text-black px-4 py-2 rounded-md">
             Add Blog
           </button>
         </Link> */}

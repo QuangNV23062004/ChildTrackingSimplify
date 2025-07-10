@@ -30,7 +30,7 @@ class ConsultationService {
   }
 
   async rateConsultation(id: string, rating: number) {
-    const response = await api.patch(`/Consultation/${id}/rate`, { rating });
+    const response = await api.patch(`/Consultation/${id}/rating`, { rating });
     return response.data;
   }
 }

@@ -125,17 +125,17 @@ export default function RequestList({
   const getStatusColor = (status: number): string => {
     switch (status) {
       case 0:
-        return "bg-yellow-500 text-white";
+        return "bg-yellow-500 text-black";
       case 1:
-        return "bg-red-500 text-white";
+        return "bg-red-500 text-black";
       case 2:
-        return "bg-green-500 text-white";
+        return "bg-green-500 text-black";
       case 3:
-        return "bg-blue-500 text-white";
+        return "bg-blue-500 text-black";
       case 4:
-        return "bg-red-500 text-white";
+        return "bg-red-500 text-black";
       default:
-        return "bg-gray-500 text-white";
+        return "bg-gray-500 text-black";
     }
   };
 
@@ -293,7 +293,7 @@ export default function RequestList({
                   {/* Header with Status */}
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-3">
-                      <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-white font-semibold text-sm">
+                      <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-black font-semibold text-sm">
                         {request.member?.name?.charAt(0).toUpperCase() || "M"}
                       </div>
                       <div>
@@ -330,14 +330,14 @@ export default function RequestList({
                   <div className="flex gap-2 pt-2 border-t border-gray-100">
                     <button
                       onClick={() => handleViewDetails(request)}
-                      className="flex-1 px-3 py-2 bg-blue-600 text-white text-sm rounded-md hover:bg-blue-700 transition-colors duration-200"
+                      className="flex-1 px-3 py-2 bg-blue-600 text-black text-sm rounded-md hover:bg-blue-700 transition-colors duration-200"
                     >
                       View Details
                     </button>
                     {request.status === 0 && (
                       <button
                         onClick={() => handleStatusUpdate(request.id, 2)}
-                        className="flex-1 px-3 py-2 bg-green-600 text-white text-sm rounded-md hover:bg-green-700 transition-colors duration-200"
+                        className="flex-1 px-3 py-2 bg-green-600 text-black text-sm rounded-md hover:bg-green-700 transition-colors duration-200"
                       >
                         Accept
                       </button>
@@ -345,7 +345,7 @@ export default function RequestList({
                     {request.status === 0 && (
                       <button
                         onClick={() => handleStatusUpdate(request.id, 1)}
-                        className="flex-1 px-3 py-2 bg-red-600 text-white text-sm rounded-md hover:bg-red-700 transition-colors duration-200"
+                        className="flex-1 px-3 py-2 bg-red-600 text-black text-sm rounded-md hover:bg-red-700 transition-colors duration-200"
                       >
                         Reject
                       </button>

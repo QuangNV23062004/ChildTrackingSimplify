@@ -2,7 +2,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import authService from "@/services/authService";
-import { toast } from "react-toastify";
+import { useToast } from "../common/ToastContext";
 import { AxiosError } from "axios";
 import { RoleEnum } from "@/enum/RoleEnum";
 
@@ -13,6 +13,8 @@ export default function LoginForm() {
   });
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [submitting, setSubmitting] = useState(false);
+
+  const toast = useToast();
 
   const validate = () => {
     const errs: { [key: string]: string } = {};
@@ -52,17 +54,17 @@ export default function LoginForm() {
       } catch (error) {
         setSubmitting(false);
         if (error instanceof AxiosError) {
-          toast.error(error.response?.data);
+          toast.showToast(error.response?.data, "error");
         } else {
-          toast.error("An error occurred");
+          toast.showToast("An error occurred", "error");
         }
       }
     }
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-[60vh] py-8 text-white w-full ">
-      <div className="w-full max-w-sm bg-black/50 rounded-lg shadow p-6 flex flex-col gap-4">
+    <div className="flex flex-col items-center justify-center min-h-[60vh] py-8 text-black w-full">
+      <div className="w-full max-w-sm bg-white rounded-lg shadow p-6 flex flex-col gap-4">
         <h2 className="text-2xl font-bold text-center mb-2">Login</h2>
         <div>
           <label htmlFor="email" className="block font-medium mb-1">
@@ -105,13 +107,13 @@ export default function LoginForm() {
 
         <button
           onClick={handleSubmit}
-          className="w-full py-2 mt-2 bg-blue-500 text-white font-semibold rounded hover:bg-blue-600 transition"
+          className="w-full py-2 mt-2 bg-blue-500 text-black font-semibold rounded hover:bg-blue-600 transition"
           disabled={submitting}
         >
           {submitting ? "Logging in..." : "Login"}
         </button>
       </div>
-      <div className="mt-4 text-center text-sm text-white-600">
+      <div className="mt-4 text-center text-sm text-black-600">
         Don&apos;t have an account?{" "}
         <Link
           href="/register"

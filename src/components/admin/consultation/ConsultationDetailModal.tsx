@@ -32,7 +32,7 @@ export default function ConsultationDetailModal({
   const { request } = consultation;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
       <div className="bg-white rounded-lg p-4 sm:p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
         {/* Header */}
         <div className="flex justify-between items-center mb-4 sm:mb-6">
@@ -61,7 +61,7 @@ export default function ConsultationDetailModal({
               </p>
             </div>
             <span
-              className={`inline-flex px-2 sm:px-3 py-1 text-xs sm:text-sm font-semibold rounded-full text-white ${getStatusColor(
+              className={`inline-flex px-2 sm:px-3 py-1 text-xs sm:text-sm font-semibold rounded-full text-black ${getStatusColor(
                 consultation.status
               )}`}
             >
@@ -212,7 +212,7 @@ export default function ConsultationDetailModal({
         <div className="flex justify-end mt-4 sm:mt-6 pt-4 sm:pt-6 border-t border-gray-200">
           <button
             onClick={onClose}
-            className="px-4 py-2 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white rounded-lg transition-all duration-200 shadow-sm hover:shadow-md text-sm sm:text-base font-medium"
+            className="px-4 py-2 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-black rounded-lg transition-all duration-200 shadow-sm hover:shadow-md text-sm sm:text-base font-medium"
           >
             Close
           </button>

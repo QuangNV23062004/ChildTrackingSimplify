@@ -4,6 +4,7 @@ import statisticService from "@/services/statisticService";
 import { toast } from "react-toastify";
 import { AxiosError } from "axios";
 import BarChart from "./shared/BarChart";
+import Loading from "../../common/Loading";
 
 export default function NewRequest() {
   const [newRequestStat, setNewRequestStat] = useState([
@@ -52,9 +53,7 @@ export default function NewRequest() {
           </h3>
           <div className="flex-1 min-h-0">
             {loading ? (
-              <div className="flex justify-center items-center h-full">
-                <div className="animate-spin rounded-full h-8 w-8 lg:h-12 lg:w-12 border-t-2 border-b-2 border-gray-900"></div>
-              </div>
+              <Loading message="Loading new requests..." />
             ) : (
               <div className="h-full w-full">
                 <BarChart

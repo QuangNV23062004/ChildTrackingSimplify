@@ -5,7 +5,7 @@ import authService from "@/services/authService";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState, useRef, useEffect } from "react";
-import { toast } from "react-toastify";
+import { useToast } from "../ToastContext";
 
 interface User {
   name: string;
@@ -17,6 +17,8 @@ export default function AuthButtons({ user }: { user: User | null }) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
+  const toast = useToast();
+
   // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -38,7 +40,7 @@ export default function AuthButtons({ user }: { user: User | null }) {
     // Clear localStorage
     await authService.logout();
     router.push("/login");
-    toast.success("Logged out successfully");
+    toast.showToast("Logged out successfully", "success");
   };
 
   return (
@@ -53,7 +55,7 @@ export default function AuthButtons({ user }: { user: User | null }) {
           </Link>
           <Link
             href="/register"
-            className="px-4 py-2 rounded font-medium bg-blue-500 text-white hover:bg-blue-600 transition"
+            className="px-4 py-2 rounded font-medium bg-blue-500 text-black hover:bg-blue-600 transition"
           >
             Sign Up
           </Link>
@@ -64,7 +66,7 @@ export default function AuthButtons({ user }: { user: User | null }) {
             onClick={() => setIsDropdownOpen(!isDropdownOpen)}
             className="flex items-center gap-2 hover:bg-gray-50 rounded-lg p-1 transition-colors duration-200"
           >
-            <div className="w-8 h-8 rounded-full bg-blue-400 flex items-center justify-center text-white font-bold text-lg shadow-md">
+            <div className="w-8 h-8 rounded-full bg-blue-400 flex items-center justify-center text-black font-bold text-lg shadow-md">
               {user.name.charAt(0).toUpperCase()}
             </div>
             <span className="font-medium text-blue-700">{user.name}</span>
@@ -94,7 +96,6 @@ export default function AuthButtons({ user }: { user: User | null }) {
               </div>
               <Link
                 href="/profile"
-                className="w-full  py-2 text-left text-sm text-gray-900 hover:bg-gray-50 transition-colors duration-200 flex items-center gap-2"
               >
                 <p className="w-full px-4 py-2 text-left text-sm text-gray-900 hover:bg-gray-50 transition-colors duration-200 flex items-center gap-2">
                   <svg

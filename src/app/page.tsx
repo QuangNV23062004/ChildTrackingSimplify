@@ -131,7 +131,7 @@ export default function Home() {
             <div className="flex gap-4 mt-2">
               <Link
                 href="/register"
-                className="bg-blue-500 hover:bg-blue-600 text-white font-semibold px-6 py-2 rounded-full border border-blue-500 transition"
+                className="bg-blue-500 hover:bg-blue-600 text-black font-semibold px-6 py-2 rounded-full border border-blue-500 transition"
               >
                 Get Started
               </Link>
@@ -217,8 +217,8 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="flex flex-col items-center justify-center py-10 bg-blue-500 rounded-3xl shadow text-white w-full max-w-6xl mx-auto mt-10">
-        <h2 className="text-3xl font-bold mb-4 text-white text-center">
+      <section className="flex flex-col items-center justify-center py-10 bg-blue-500 rounded-3xl shadow text-black w-full max-w-6xl mx-auto mt-10">
+        <h2 className="text-3xl font-bold mb-4 text-black text-center">
           Ready to track your child&apos;s growth?
         </h2>
         <p className="text-lg mb-6 max-w-2xl text-center">

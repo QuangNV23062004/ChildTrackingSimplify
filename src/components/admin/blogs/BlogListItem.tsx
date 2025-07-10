@@ -53,7 +53,7 @@ export default function BlogListItem({
       </td>
       <td className="p-3 sm:p-4">
         <button
-          className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-md cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 text-xs sm:text-sm font-medium shadow-sm hover:shadow-md"
+          className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-black px-3 sm:px-4 py-1.5 sm:py-2 rounded-md cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 text-xs sm:text-sm font-medium shadow-sm hover:shadow-md"
           onClick={() => {
             setBlogStatus(blog.id, status);
           }}

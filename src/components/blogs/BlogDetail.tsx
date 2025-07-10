@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import blogService from "@/services/blogService";
 import { Blog } from "@/types/blog";
 import Image from "next/image";
+import Loading from "../common/Loading";
 
 export default function BlogDetail({ id }: { id: string }) {
   const [blog, setBlog] = useState<Blog | null>(null);
@@ -27,16 +28,7 @@ export default function BlogDetail({ id }: { id: string }) {
   }, [id]);
 
   if (loading) {
-    return (
-      <div className="w-full flex items-center justify-center py-12 sm:py-16 lg:py-20">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-8 w-8 sm:h-12 sm:w-12 border-b-2 border-blue-600 mx-auto mb-3 sm:mb-4"></div>
-          <p className="text-gray-600 text-sm sm:text-lg">
-            Loading blog post...
-          </p>
-        </div>
-      </div>
-    );
+    return <Loading message="Loading blog post..." />;
   }
 
   if (error || !blog) {
@@ -54,7 +46,7 @@ export default function BlogDetail({ id }: { id: string }) {
           </p>
           <button
             onClick={() => window.history.back()}
-            className="px-4 sm:px-6 py-2 sm:py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200 text-sm sm:text-base"
+            className="px-4 sm:px-6 py-2 sm:py-3 bg-blue-600 text-black rounded-lg hover:bg-blue-700 transition-colors duration-200 text-sm sm:text-base"
           >
             Go Back
           </button>

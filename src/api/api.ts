@@ -4,7 +4,7 @@ import axios, {
   InternalAxiosRequestConfig,
 } from "axios";
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API;
+const API_BASE_URL = process.env.NEXT_PUBLIC_API + '/api';
 
 // Create an Axios instance
 const api = axios.create({

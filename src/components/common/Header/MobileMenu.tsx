@@ -91,7 +91,7 @@ export default function MobileMenu({
                 </Link>
                 <Link
                   href="/register"
-                  className="px-4 py-2 rounded font-medium bg-blue-500 text-white hover:bg-blue-600 transition text-center"
+                  className="px-4 py-2 rounded font-medium bg-blue-500 text-black hover:bg-blue-600 transition text-center"
                   onClick={() => setMobileOpen()}
                 >
                   Sign Up
@@ -99,10 +99,10 @@ export default function MobileMenu({
               </>
             ) : (
               <div className="flex items-center gap-2 px-2 py-2">
-                <div className="w-8 h-8 rounded-full bg-blue-400 flex items-center justify-center text-white font-bold text-lg shadow-md">
+                <div className="w-8 h-8 rounded-full bg-blue-400 flex items-center justify-center text-black font-bold text-lg shadow-md">
                   {user.name.charAt(0).toUpperCase()}
                 </div>
-                <span className="font-medium text-white-700">{user.name}</span>
+                <span className="font-medium text-black-700">{user.name}</span>
               </div>
             )}
           </div>
