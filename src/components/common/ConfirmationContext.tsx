@@ -30,7 +30,7 @@ export const ConfirmationProvider = ({ children }: { children: ReactNode }) => {
     setOpen(true);
     return new Promise<boolean>((resolve) => {
       setResolvePromise(() => resolve);
-    });
+    }); 
   };
 
   const handleConfirm = () => {
