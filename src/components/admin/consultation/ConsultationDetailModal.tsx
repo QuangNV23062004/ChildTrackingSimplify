@@ -95,19 +95,13 @@ export default function ConsultationDetailModal({
                 <div>
                   <p className="text-gray-500 text-xs sm:text-sm">Name</p>
                   <p className="text-gray-900 font-medium text-sm sm:text-base">
-                    {request.member.name}
+                    {consultation.member?.name || "N/A"}
                   </p>
                 </div>
                 <div>
                   <p className="text-gray-500 text-xs sm:text-sm">Email</p>
                   <p className="text-gray-900 font-medium text-sm sm:text-base break-all">
-                    {request.member.email}
-                  </p>
-                </div>
-                <div className="sm:col-span-2">
-                  <p className="text-gray-500 text-xs sm:text-sm">Member ID</p>
-                  <p className="text-gray-700 font-mono text-xs sm:text-sm break-all">
-                    {request.member.id}
+                    {consultation.member?.email || "N/A"}
                   </p>
                 </div>
               </div>
@@ -124,19 +118,13 @@ export default function ConsultationDetailModal({
                 <div>
                   <p className="text-gray-500 text-xs sm:text-sm">Name</p>
                   <p className="text-gray-900 font-medium text-sm sm:text-base">
-                    {request.doctor.name}
+                    {consultation.doctor?.name || "N/A"}
                   </p>
                 </div>
                 <div>
                   <p className="text-gray-500 text-xs sm:text-sm">Email</p>
                   <p className="text-gray-900 font-medium text-sm sm:text-base break-all">
-                    {request.doctor.email}
-                  </p>
-                </div>
-                <div className="sm:col-span-2">
-                  <p className="text-gray-500 text-xs sm:text-sm">Doctor ID</p>
-                  <p className="text-gray-700 font-mono text-xs sm:text-sm break-all">
-                    {request.doctor.id}
+                    {consultation.doctor?.email || "N/A"}
                   </p>
                 </div>
               </div>
@@ -144,7 +132,7 @@ export default function ConsultationDetailModal({
           </div>
 
           {/* Child Information */}
-          {request.child && (
+          {consultation.child && (
             <div>
               <h4 className="text-sm sm:text-base font-semibold text-gray-900 mb-2">
                 Child Information
@@ -154,13 +142,7 @@ export default function ConsultationDetailModal({
                   <div>
                     <p className="text-gray-500 text-xs sm:text-sm">Name</p>
                     <p className="text-gray-900 font-medium text-sm sm:text-base">
-                      {request.child.name}
-                    </p>
-                  </div>
-                  <div>
-                    <p className="text-gray-500 text-xs sm:text-sm">Child ID</p>
-                    <p className="text-gray-700 font-mono text-xs sm:text-sm break-all">
-                      {request.child.id}
+                      {consultation.child?.name || "N/A"}
                     </p>
                   </div>
                 </div>
@@ -204,6 +186,18 @@ export default function ConsultationDetailModal({
               <p className="text-gray-900 font-mono text-xs sm:text-sm break-all">
                 {consultation.id}
               </p>
+            </div>
+          </div>
+
+          {/* Request Message */}
+          <div>
+            <h4 className="text-sm sm:text-base font-semibold text-gray-900 mb-2">
+              Request Message
+            </h4>
+            <div className="bg-gray-100 p-3 sm:p-4 rounded-lg">
+              <div className="text-xs text-gray-500 mt-1 max-w-xs truncate">
+                {consultation.request?.message || ""}
+              </div>
             </div>
           </div>
         </div>

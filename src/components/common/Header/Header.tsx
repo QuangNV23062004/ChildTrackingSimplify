@@ -23,8 +23,6 @@ const navLinks: {
   // },
   { label: "Blogs", href: "/blogs" },
   { label: "FAQs", href: "/faqs" },
-
-  { label: "Consultations", href: "/consultations" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -34,7 +32,7 @@ const Header = () => {
     null
   );
   const [mobileDropdownOpen, setMobileDropdownOpen] = useState(false);
-  const [user, setUser] = useState<{ name: string } | null>(null);
+  const [user, setUser] = useState<{ name: string; email: string; role: string } | null>(null);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
@@ -43,7 +41,12 @@ const Header = () => {
       if (userData) {
         try {
           const parsed = JSON.parse(userData);
-          setUser(parsed);
+          // Ensure user object has name, email, and role
+          if (parsed && parsed.name && parsed.email && parsed.role) {
+            setUser({ name: parsed.name, email: parsed.email, role: parsed.role });
+          } else {
+            setUser(null);
+          }
         } catch {
           setUser(null);
         }

@@ -33,6 +33,10 @@ class ConsultationService {
     const response = await api.patch(`/Consultation/${id}/rating`, { rating });
     return response.data;
   }
+
+  async createConsultationRequest({ doctorId, childId, message }: { doctorId: string, childId?: string, message: string }) {
+    return api.post("/Request", { doctorId, childId, message });
+  }
 }
 
 export default new ConsultationService();

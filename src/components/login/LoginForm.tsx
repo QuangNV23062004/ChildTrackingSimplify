@@ -48,8 +48,10 @@ export default function LoginForm() {
         setSubmitting(false);
         if (role === RoleEnum.Admin) {
           window.location.href = "/admin";
+          toast.showToast("Login successful", "success");
         } else {
           window.location.href = "/";
+          toast.showToast("Login successful", "success");
         }
       } catch (error) {
         setSubmitting(false);

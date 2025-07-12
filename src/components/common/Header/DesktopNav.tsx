@@ -28,7 +28,7 @@ export default function DesktopNav({
             onMouseEnter={() => setDesktopDropdownOpen(link.label)}
             onMouseLeave={() => setDesktopDropdownOpen(null)}
           >
-            <button className="flex items-center gap-1 font-medium text-gray-700 hover:text-blue-600 transition">
+            <button className="flex items-center gap-1 font-medium text-gray-700 hover:text-blue-600 transition cursor-pointer">
               {link.label}
               <svg
                 className="w-4 h-4 ml-1"

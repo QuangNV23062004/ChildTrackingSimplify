@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import React, { useState, useRef, useEffect } from "react";
 import { useToast } from "../ToastContext";
 
+// User type matches Header user object
 interface User {
   name: string;
   email: string;
@@ -97,7 +98,7 @@ export default function AuthButtons({ user }: { user: User | null }) {
               <Link
                 href="/profile"
               >
-                <p className="w-full px-4 py-2 text-left text-sm text-gray-900 hover:bg-gray-50 transition-colors duration-200 flex items-center gap-2">
+                <p className="w-full px-4 py-2 text-left text-sm text-gray-900 hover:bg-gray-50 transition-colors duration-200 flex items-center gap-2 cursor-pointer">
                   <svg
                     className="w-4 h-4"
                     fill="none"
@@ -115,28 +116,88 @@ export default function AuthButtons({ user }: { user: User | null }) {
                 </p>
               </Link>
               {user.role === RoleEnum.User && (
-                <Link href="/children">
-                  <p className="w-full px-4 py-2 text-left text-sm text-gray-900 hover:bg-gray-50 transition-colors duration-200 flex items-center gap-2">
-                    <svg
-                      className="w-4 h-4"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M12 4v16m8-8H4"
-                      />
-                    </svg>
-                    Children
-                  </p>
-                </Link>
+                <>
+                  <Link href="/children">
+                    <p className="w-full px-4 py-2 text-left text-sm text-gray-900 hover:bg-gray-50 transition-colors duration-200 flex items-center gap-2 cursor-pointer">
+                      <svg
+                        className="w-4 h-4"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M12 4v16m8-8H4"
+                        />
+                      </svg>
+                      Children
+                    </p>
+                  </Link>
+                  <Link href="/profile/consultations">
+                    <p className="w-full px-4 py-2 text-left text-sm text-gray-900 hover:bg-gray-50 transition-colors duration-200 flex items-center gap-2 cursor-pointer">
+                      <svg
+                        className="w-4 h-4"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M17 8h2a2 2 0 012 2v8a2 2 0 01-2 2H7a2 2 0 01-2-2V10a2 2 0 012-2h2m3-4h.01M12 4a4 4 0 110 8 4 4 0 010-8z"
+                        />
+                      </svg>
+                      Consultations
+                    </p>
+                  </Link>
+                  <Link href="/profile/requests">
+                    <p className="w-full px-4 py-2 text-left text-sm text-gray-900 hover:bg-gray-50 transition-colors duration-200 flex items-center gap-2 cursor-pointer">
+                      <svg
+                        className="w-4 h-4"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M9 17v-6a2 2 0 012-2h2a2 2 0 012 2v6m-6 0h6"
+                        />
+                        <rect x="9" y="4" width="6" height="4" rx="1" />
+                      </svg>
+                      Requests
+                    </p>
+                  </Link>
+                </>
+              )}
+              {user.role === RoleEnum.Doctor && (
+                <>
+                  <Link href="/doctor/consultations">
+                    <p className="w-full px-4 py-2 text-left text-sm text-gray-900 hover:bg-gray-50 transition-colors duration-200 flex items-center gap-2 cursor-pointer">
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8h2a2 2 0 012 2v8a2 2 0 01-2 2H7a2 2 0 01-2-2V10a2 2 0 012-2h2m3-4h.01M12 4a4 4 0 110 8 4 4 0 010-8z" />
+                      </svg>
+                      Consultations
+                    </p>
+                  </Link>
+                  <Link href="/doctor/requests">
+                    <p className="w-full px-4 py-2 text-left text-sm text-gray-900 hover:bg-gray-50 transition-colors duration-200 flex items-center gap-2 cursor-pointer">
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 17v-6a2 2 0 012-2h2a2 2 0 012 2v6m-6 0h6" />
+                        <rect x="9" y="4" width="6" height="4" rx="1" />
+                      </svg>
+                      Requests
+                    </p>
+                  </Link>
+                </>
               )}
               <button
                 onClick={handleLogout}
-                className="w-full px-4 py-2 text-left text-sm text-red-600 hover:bg-red-50 transition-colors duration-200 flex items-center gap-2"
+                className="w-full px-4 py-2 text-left text-sm text-red-600 hover:bg-red-50 transition-colors duration-200 flex items-center gap-2 cursor-pointer"
               >
                 <svg
                   className="w-4 h-4"

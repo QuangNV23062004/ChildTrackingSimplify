@@ -20,7 +20,7 @@ export default function MobileMenu({
   handleMobileDropdownToggle: () => void;
   mobileDropdownOpen: boolean;
   setMobileDropdownOpen: () => void;
-  user: { name: string };
+  user: { name: string; email: string; role: string } | null;
 }) {
   return (
     <>
@@ -98,11 +98,19 @@ export default function MobileMenu({
                 </Link>
               </>
             ) : (
+              <div className="flex flex-col gap-2 mt-2">
               <div className="flex items-center gap-2 px-2 py-2">
                 <div className="w-8 h-8 rounded-full bg-blue-400 flex items-center justify-center text-black font-bold text-lg shadow-md">
                   {user.name.charAt(0).toUpperCase()}
                 </div>
                 <span className="font-medium text-black-700">{user.name}</span>
+                </div>
+                <Link href="/profile/consultations" className="px-4 py-2 rounded font-medium bg-blue-500 text-black hover:bg-blue-600 transition text-center cursor-pointer" onClick={() => setMobileOpen()}>
+                  Consultations
+                </Link>
+                <Link href="/profile/requests" className="px-4 py-2 rounded font-medium bg-blue-500 text-black hover:bg-blue-600 transition text-center cursor-pointer" onClick={() => setMobileOpen()}>
+                  Requests
+                </Link>
               </div>
             )}
           </div>
