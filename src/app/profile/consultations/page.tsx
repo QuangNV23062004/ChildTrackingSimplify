@@ -19,6 +19,13 @@ export default function UserConsultationsPage() {
   const [endModalOpen, setEndModalOpen] = useState(false);
   const [endingConsultation, setEndingConsultation] =
     useState<Consultation | null>(null);
+
+  const [ratingModal, setRatingModal] = useState<{
+    open: boolean;
+    consultation: Consultation | null;
+  }>({ open: false, consultation: null });
+  const [selectedRating, setSelectedRating] = useState<number>(0);
+  const [ratingLoading, setRatingLoading] = useState(false);
   const confirm = useConfirmation().confirm;
   const toast = useToast();
 
@@ -97,6 +104,25 @@ export default function UserConsultationsPage() {
       toast.showToast("Failed to end consultation", "error");
     }
   };
+
+  function Star({
+    filled,
+    onClick,
+  }: {
+    filled: boolean;
+    onClick?: () => void;
+  }) {
+    return (
+      <span
+        onClick={onClick}
+        className={`cursor-pointer text-2xl ${
+          filled ? "text-yellow-400" : "text-gray-300"
+        }`}
+      >
+        ★
+      </span>
+    );
+  }
 
   if (loading) {
     return (
@@ -208,6 +234,27 @@ export default function UserConsultationsPage() {
                             End Consultation
                           </button>
                         )}
+                        {consultation.status === 1 &&
+                          (consultation.rating ? (
+                            <div className="flex justify-center">
+                              {[1, 2, 3, 4, 5].map((star) => (
+                                <Star
+                                  key={star}
+                                  filled={star <= consultation.rating}
+                                />
+                              ))}
+                            </div>
+                          ) : (
+                            <button
+                              onClick={() => {
+                                setRatingModal({ open: true, consultation });
+                                setSelectedRating(0);
+                              }}
+                              className="ml-2 px-3 py-1 text-xs bg-yellow-500 hover:bg-yellow-600 text-white rounded transition-all duration-200 shadow-sm"
+                            >
+                              Rate
+                            </button>
+                          ))}
                       </td>
                     </tr>
                   );
@@ -230,6 +277,65 @@ export default function UserConsultationsPage() {
             onClose={() => setForumConsultation(null)}
             isCompleted={forumConsultation.status === 1}
           />
+        )}
+        {ratingModal.open && ratingModal.consultation && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
+            <div className="bg-white rounded-lg p-6 w-80 shadow-lg">
+              <h2 className="text-lg font-bold mb-4 text-gray-800">
+                Rate Consultation
+              </h2>
+              <div className="flex justify-center mb-4">
+                {[1, 2, 3, 4, 5].map((star) => (
+                  <Star
+                    key={star}
+                    filled={star <= selectedRating}
+                    onClick={() => setSelectedRating(star)}
+                  />
+                ))}
+              </div>
+              <div className="flex justify-end gap-2">
+                <button
+                  className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300"
+                  onClick={() =>
+                    setRatingModal({ open: false, consultation: null })
+                  }
+                  disabled={ratingLoading}
+                >
+                  Cancel
+                </button>
+                <button
+                  className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+                  disabled={selectedRating === 0 || ratingLoading}
+                  onClick={async () => {
+                    if (!ratingModal.consultation) return;
+                    setRatingLoading(true);
+                    try {
+                      await consultationService.rateConsultation(
+                        ratingModal.consultation.id,
+                        selectedRating
+                      );
+                      setConsultations((prev) =>
+                        prev.map((c) =>
+                          c.id === ratingModal.consultation?.id
+                            ? { ...c, rating: selectedRating }
+                            : c
+                        )
+                      );
+                      toast.showToast("Thank you for your rating!", "success");
+                      setRatingModal({ open: false, consultation: null });
+                      setSelectedRating(0);
+                    } catch {
+                      toast.showToast("Failed to submit rating", "error");
+                    } finally {
+                      setRatingLoading(false);
+                    }
+                  }}
+                >
+                  {ratingLoading ? "Submitting..." : "Submit"}
+                </button>
+              </div>
+            </div>
+          </div>
         )}
       </div>
     </div>
