@@ -33,15 +33,15 @@ export default function BlogDetail({ id }: { id: string }) {
 
   if (error || !blog) {
     return (
-      <div className="w-full flex items-center justify-center py-12 sm:py-16 lg:py-20">
+      <div className="w-full flex items-center justify-center py-12 sm:py-16 lg:py-20 text-black">
         <div className="text-center max-w-md mx-auto px-4">
           <div className="text-red-500 text-4xl sm:text-6xl mb-3 sm:mb-4">
             ⚠️
           </div>
-          <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">
+          <h2 className="text-xl sm:text-2xl font-bold text-black mb-2">
             Oops!
           </h2>
-          <p className="text-gray-600 mb-4 text-sm sm:text-base">
+          <p className="text-black mb-4 text-sm sm:text-base">
             {error || "Blog post not found"}
           </p>
           <button
@@ -80,11 +80,11 @@ export default function BlogDetail({ id }: { id: string }) {
         )}
 
         <div className="p-4 sm:p-6 lg:p-8">
-          <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 sm:mb-4 leading-tight">
+          <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-black mb-3 sm:mb-4 leading-tight">
             {blog.title}
           </h1>
 
-          <div className="flex flex-col sm:flex-row sm:flex-wrap items-start sm:items-center gap-2 sm:gap-4 text-xs sm:text-sm text-gray-600 mb-4 sm:mb-6">
+          <div className="flex flex-col sm:flex-row sm:flex-wrap items-start sm:items-center gap-2 sm:gap-4 text-xs sm:text-sm text-black mb-4 sm:mb-6">
             {blog.user && (
               <div className="flex items-center gap-1 sm:gap-2">
                 <span className="font-medium">By {blog.user.name}</span>
@@ -103,7 +103,7 @@ export default function BlogDetail({ id }: { id: string }) {
       {/* Blog Content */}
       <div className="bg-white rounded-lg shadow-md p-4 sm:p-6 lg:p-8">
         <div
-          className="prose prose-sm sm:prose-base lg:prose-lg max-w-none prose-headings:text-gray-900 prose-p:text-gray-700 prose-a:text-blue-600 prose-strong:text-gray-900 prose-blockquote:border-l-blue-600 prose-blockquote:bg-blue-50 prose-blockquote:py-2 prose-blockquote:px-4 prose-blockquote:rounded-r-lg prose-img:rounded-lg prose-img:shadow-md"
+          className="prose prose-sm sm:prose-base lg:prose-lg max-w-none prose-headings:text-black prose-p:text-black prose-a:text-blue-600 prose-strong:text-black prose-blockquote:border-l-blue-600 prose-blockquote:bg-blue-50 prose-blockquote:py-2 prose-blockquote:px-4 prose-blockquote:rounded-r-lg prose-img:rounded-lg prose-img:shadow-md"
           dangerouslySetInnerHTML={{ __html: blog.content || "" }}
         />
       </div>
@@ -112,7 +112,7 @@ export default function BlogDetail({ id }: { id: string }) {
       <div className="mt-6 sm:mt-8 text-center">
         <button
           onClick={() => window.history.back()}
-          className="inline-flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-3 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors duration-200 font-medium text-sm sm:text-base"
+          className="inline-flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-3 bg-gray-100 text-black rounded-lg hover:bg-gray-200 transition-colors duration-200 font-medium text-sm sm:text-base"
         >
           <svg
             className="w-3 h-3 sm:w-4 sm:h-4"
