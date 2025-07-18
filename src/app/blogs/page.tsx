@@ -40,7 +40,7 @@ export default function Page() {
   return (
     <div className="w-[100%] p-4">
       <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold">Blogs</h1>
+        <h1 className="text-2xl font-bold text-black">Blogs</h1>
         {/* <Link href="/admin/blogs/create">
           <button className="bg-green-500 text-black px-4 py-2 rounded-md">
             Add Blog
