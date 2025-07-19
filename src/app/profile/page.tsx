@@ -46,7 +46,9 @@ const ProfilePage = () => {
   };
 
   if (loading) {
-    return <div className="flex-1 flex items-center justify-center">Loading...</div>;
+    return (
+      <div className="flex-1 flex items-center justify-center">Loading...</div>
+    );
   }
 
   return (
@@ -111,4 +113,4 @@ const ProfilePage = () => {
   );
 };
 
-export default ProfilePage; 
+export default ProfilePage;

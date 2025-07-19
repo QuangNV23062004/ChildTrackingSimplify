@@ -19,9 +19,14 @@ class UserService {
     }
   }
 
-  async updateCurrentUser(id: string, name: string, email: string) {
+  async updateCurrentUser(
+    id: string,
+    name: string,
+    email: string,
+    role?: number
+  ) {
     try {
-      const response = await api.patch(`/User/${id}`, { name, email });
+      const response = await api.patch(`/User/${id}`, { name, email, role });
       return response.data;
     } catch (error) {
       throw error;

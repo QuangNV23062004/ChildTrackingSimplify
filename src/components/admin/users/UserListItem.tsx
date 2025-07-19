@@ -4,11 +4,23 @@ import { User } from "@/types/blog";
 interface UserListItemProps {
   user: User & { createdAt?: string; isDeleted?: boolean };
   handleDeleteUser: (id: string) => void;
+  editingUserId: string | null;
+  setEditingUserId: (id: string | null) => void;
+  userRole: { [userId: string]: number };
+  setUserRole: React.Dispatch<
+    React.SetStateAction<{ [userId: string]: number }>
+  >;
+  handleUpdateUserRole: (id: string, role: number) => void;
 }
 
 export default function UserListItem({
   user,
   handleDeleteUser,
+  editingUserId,
+  setEditingUserId,
+  userRole,
+  setUserRole,
+  handleUpdateUserRole,
 }: UserListItemProps) {
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
@@ -44,6 +56,48 @@ export default function UserListItem({
         {user.createdAt ? formatDate(user.createdAt) : ""}
       </td>
       <td className="px-4 lg:px-6 py-3 lg:py-4">
+        {editingUserId === user.id ? (
+          <>
+            <select
+              value={userRole[user.id]}
+              onChange={(e) =>
+                setUserRole((prev) => ({
+                  ...prev,
+                  [user.id]: Number(e.target.value),
+                }))
+              }
+              className="mr-2 px-2 py-1 border rounded text-xs lg:text-sm"
+            >
+              <option value={0}>User</option>
+              <option value={1}>Admin</option>
+              <option value={2}>Doctor</option>
+            </select>
+            <button
+              onClick={() => {
+                handleUpdateUserRole(user.id, userRole[user.id]);
+                setEditingUserId(null);
+              }}
+              className="bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white px-3 py-1.5 lg:px-4 lg:py-2 rounded-md transition-all duration-200 shadow-sm hover:shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50 text-xs lg:text-sm font-medium mr-2"
+            >
+              Save
+            </button>
+            <button
+              onClick={() => setEditingUserId(null)}
+              className="bg-gray-400 hover:bg-gray-500 active:bg-gray-600 text-white px-3 py-1.5 lg:px-4 lg:py-2 rounded-md transition-all duration-200 shadow-sm hover:shadow-md focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-opacity-50 text-xs lg:text-sm font-medium mr-2"
+            >
+              Cancel
+            </button>
+          </>
+        ) : (
+          <>
+            <button
+              onClick={() => setEditingUserId(user.id)}
+              className="bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white px-3 py-1.5 lg:px-4 lg:py-2 rounded-md transition-all duration-200 shadow-sm hover:shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50 text-xs lg:text-sm font-medium mr-2"
+            >
+              Edit
+            </button>
+          </>
+        )}
         <button
           className="bg-red-600 hover:bg-red-700 active:bg-red-800 text-white px-3 py-1.5 lg:px-4 lg:py-2 rounded-md transition-all duration-200 shadow-sm hover:shadow-md focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-opacity-50 text-xs lg:text-sm font-medium"
           onClick={() => handleDeleteUser(user.id)}
