@@ -23,6 +23,8 @@ export default function UserList({
   } | null>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
+  const [editingUserId, setEditingUserId] = useState<string | null>(null);
+  const [userRole, setUserRole] = useState<{ [userId: string]: number }>({});
 
   const handleCreateUser = async (
     email: string,
@@ -45,6 +47,38 @@ export default function UserList({
       );
     }
   };
+
+  const handleUpdateUserRole = async (id: string, role: number) => {
+    try {
+      const currentUser = usersData?.data.find((user) => user.id === id);
+      if (!currentUser) {
+        return;
+      }
+      const response = await userService.updateCurrentUser(
+        id,
+        currentUser.name,
+        currentUser.email,
+        role
+      );
+
+      setUsersData((prev) => {
+        if (!prev) return prev; // or return null;
+        return {
+          ...prev,
+          data: prev.data.map((user) =>
+            user.id === response.user.id ? response.user : user
+          ),
+        };
+      });
+    } catch (error) {
+      toast.error(
+        error instanceof AxiosError
+          ? error?.response?.data
+          : "Failed to delete user"
+      );
+    }
+  };
+
   const handleDeleteUser = async (id: string) => {
     try {
       setSelectedUser(null);
@@ -71,6 +105,17 @@ export default function UserList({
     };
     fetchUsers();
   }, [page, size]);
+
+  useEffect(() => {
+    if (usersData) {
+      const initialRoles: { [userId: string]: number } = {};
+      usersData.data.forEach((user) => {
+        initialRoles[user.id] =
+          user.role === "User" ? 0 : user.role === "Admin" ? 1 : 2;
+      });
+      setUserRole(initialRoles);
+    }
+  }, [usersData]);
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
@@ -126,6 +171,11 @@ export default function UserList({
                   handleDeleteUser={() => {
                     setSelectedUser(user);
                   }}
+                  editingUserId={editingUserId}
+                  setEditingUserId={setEditingUserId}
+                  userRole={userRole}
+                  setUserRole={setUserRole}
+                  handleUpdateUserRole={handleUpdateUserRole}
                 />
               ))}
           </tbody>
@@ -155,9 +205,28 @@ export default function UserList({
                       <p className="text-gray-500 text-xs">{user.email}</p>
                     </div>
                   </div>
-                  <span className="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full font-medium">
-                    {user.role}
-                  </span>
+                  {editingUserId === user.id ? (
+                    <div>
+                      <label>Role</label>
+                      <select
+                        value={userRole[user.id]}
+                        onChange={(e) =>
+                          setUserRole((prev) => ({
+                            ...prev,
+                            [user.id]: Number(e.target.value),
+                          }))
+                        }
+                      >
+                        <option value={0}>User</option>
+                        <option value={1}>Admin</option>
+                        <option value={2}>Doctor</option>
+                      </select>
+                    </div>
+                  ) : (
+                    <span className="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full font-medium">
+                      {user.role}
+                    </span>
+                  )}
                 </div>
 
                 {/* Additional Info */}
@@ -167,9 +236,27 @@ export default function UserList({
 
                 {/* Action Button */}
                 <div className="flex justify-end pt-2 border-t border-gray-100">
+                  {editingUserId === user.id ? (
+                    <button
+                      onClick={() => {
+                        handleUpdateUserRole(user.id, userRole[user.id]);
+                        setEditingUserId(null);
+                      }}
+                      className="mr-2 px-3 py-1 bg-blue-500 hover:bg-blue-600 text-white rounded-md text-xs font-medium transition-colors duration-200"
+                    >
+                      Save
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => setEditingUserId(user.id)}
+                      className="mr-2 px-3 py-1 bg-gray-200 hover:bg-gray-300 text-gray-800 rounded-md text-xs font-medium transition-colors duration-200"
+                    >
+                      Edit
+                    </button>
+                  )}
                   <button
                     onClick={() => setSelectedUser(user)}
-                    className="text-red-600 hover:text-red-800 text-sm font-medium transition-colors duration-200"
+                    className="px-3 py-1 bg-red-500 hover:bg-red-600 text-white rounded-md text-xs font-medium transition-colors duration-200"
                   >
                     Delete
                   </button>
